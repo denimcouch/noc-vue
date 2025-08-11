@@ -30,8 +30,8 @@ const lightColors: ThemeColors = {
   textSecondary: '#666666',
   border: '#e0e0e0',
   canvas: {
-    stroke: '#ffffff',
-    background: '#333333',
+    stroke: '#333333',
+    background: '#fafafa',
     fill: '#18a058',
     accent: '#2080f0',
   },
@@ -47,8 +47,8 @@ const darkColors: ThemeColors = {
   textSecondary: '#c2c2c2',
   border: '#262626',
   canvas: {
-    stroke: '#101014',
-    background: '#ffffff',
+    stroke: '#ffffff',
+    background: '#333333',
     fill: '#63e2b7',
     accent: '#70c0e8',
   },
