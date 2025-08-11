@@ -6,6 +6,13 @@
       backgroundColor: themeColors.surface,
       color: themeColors.text,
       borderColor: themeColors.border,
+      '--theme-background': themeColors.background,
+      '--theme-surface': themeColors.surface,
+      '--theme-text': themeColors.text,
+      '--theme-border': themeColors.border,
+      '--theme-accent': themeColors.accent,
+      '--theme-primary': themeColors.primary,
+      '--theme-secondary': themeColors.secondary
     }"
   ></div>
 </template>
@@ -65,7 +72,7 @@ onMounted(() => {
   margin: 0 auto;
   padding: 20px;
   line-height: 1.6;
-  border: 1px solid;
+  border: 1px solid var(--theme-border);
 }
 
 /* Markdown styling */
@@ -73,9 +80,9 @@ onMounted(() => {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 0.5em;
-  border-bottom: 2px solid;
-  border-bottom-color: var(--border-color, #eee);
+  border-bottom: 2px solid var(--theme-accent);
   padding-bottom: 0.3em;
+  color: var(--theme-text);
 }
 
 .markdown-content :deep(h2) {
@@ -83,6 +90,7 @@ onMounted(() => {
   font-weight: bold;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+  color: var(--theme-primary);
 }
 
 .markdown-content :deep(h3) {
@@ -90,20 +98,22 @@ onMounted(() => {
   font-weight: bold;
   margin-top: 1em;
   margin-bottom: 0.5em;
+  color: var(--theme-secondary);
 }
 
 .markdown-content :deep(p) {
   margin-bottom: 1em;
-  opacity: 0.9;
+  color: var(--theme-text);
 }
 
 .markdown-content :deep(strong) {
   font-weight: bold;
+  color: var(--theme-accent);
 }
 
 .markdown-content :deep(em) {
   font-style: italic;
-  opacity: 0.8;
+  color: var(--theme-secondary);
 }
 
 .markdown-content :deep(ul) {
@@ -113,30 +123,40 @@ onMounted(() => {
 
 .markdown-content :deep(li) {
   margin-bottom: 0.5em;
-  opacity: 0.9;
+  color: var(--theme-accent);
 }
 
 .markdown-content :deep(code) {
-  background-color: rgba(128, 128, 128, 0.1);
+  background-color: var(--theme-surface);
+  color: var(--theme-accent);
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-family: 'Courier New', monospace;
   font-size: 0.9em;
+  border: 1px solid var(--theme-border);
 }
 
 .markdown-content :deep(pre) {
-  background-color: rgba(128, 128, 128, 0.1);
+  background-color: var(--theme-surface);
   padding: 1em;
   border-radius: 5px;
   overflow-x: auto;
   margin-bottom: 1em;
+  border: 1px solid var(--theme-border);
+}
+
+.markdown-content :deep(pre code) {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: var(--theme-text);
 }
 
 .markdown-content :deep(blockquote) {
-  border-left: 4px solid rgba(128, 128, 128, 0.3);
+  border-left: 4px solid var(--theme-accent);
   margin: 1em 0;
   padding-left: 1em;
-  opacity: 0.8;
   font-style: italic;
+  color: var(--theme-text);
 }
 </style>
