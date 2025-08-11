@@ -19,4 +19,8 @@ A uniform randomness isn't always what you want when trying to simulate the comp
 
 ### Some Basic Probability Principles
 
-I am going to add some definitions here since I didn't take Statistics or Probability in college and it's been over 15 years since I studied it.
+I am adding some definitions here since I didn't take Statistics or Probability in college and it's been over 15 years since I studied it.
+
+**Single-Event Probability** - The likelihood that a given event will occur.
+**Outcomes** - All possible results of a random process.  
+**Event** - The specific outcome or combination of outcomes being considered.
