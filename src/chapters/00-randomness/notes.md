@@ -24,3 +24,27 @@ I am adding some definitions here since I didn't take Statistics or Probability 
 **Single-Event Probability** - The likelihood that a given event will occur.
 **Outcomes** - All possible results of a random process.  
 **Event** - The specific outcome or combination of outcomes being considered.
+
+### Exercise 0.2  
+
+> What is the probability of drawing two aces in a row from a deck of 52 cards, if you reshuffle your first draw back into the deck before making your second draw? What would that probability be if you didn't reshuffle after your first draw?
+
+_Probability of drawing an ace from a deck_  
+`number of aces / number of cards = 4/52 = 0.077 ≈ 8%`  
+
+_Probability of drawing a diamond from a deck_  
+`number of aces / number of cards = 13/52 = 0.25 = 25%`  
+
+**The probability of multiple events occurring can be calculated by multiplying the individual properties of each event.**
+
+_Probability of a coin turning up heads three times in a row_  
+`(1/2) * (1/2) * (1/2) = 1/8 = 0.125 = 12.5%`  
+
+#### Solution  
+
+```typescript
+const probAceFromDeck = 4 / 52 // => 7.7%;
+const probAceTwiceFromDeck = probAceFromDeck * probAceFromDeck // => 0.6% ;
+```
+
+
