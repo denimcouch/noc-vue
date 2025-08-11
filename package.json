@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:linux-x64": "bunx rollup -c rollup.config.linux-x64.js",
     "preview": "vite preview",
     "test": "vitest run",
     "test:unit": "vitest",
