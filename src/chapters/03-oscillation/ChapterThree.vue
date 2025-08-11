@@ -8,7 +8,7 @@ import { setP5Background, setP5Stroke, setP5Fill } from '../../utils/p5-theme'
 import P5Chapter from '../../components/P5Chapter.vue'
 import type { ThemeColors } from '../../composables/useTheme'
 
-const notes = '/src/chapters/03-oscillation/notes.md'
+const notes = new URL('./notes.md', import.meta.url).href
 
 const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   let angle = 0

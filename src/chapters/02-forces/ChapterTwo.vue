@@ -8,7 +8,7 @@ import { setP5Background } from '../../utils/p5-theme'
 import P5Chapter from '../../components/P5Chapter.vue'
 import type { ThemeColors } from '../../composables/useTheme'
 
-const notes = '/src/chapters/02-forces/notes.md'
+const notes = new URL('./notes.md', import.meta.url).href
 
 const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   // let position: p5.Vector

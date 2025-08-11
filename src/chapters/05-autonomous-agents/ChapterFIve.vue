@@ -6,7 +6,7 @@
 import p5 from 'p5'
 import P5Chapter from '../../components/P5Chapter.vue'
 
-const notes = '/src/chapters/05-autonomous-agents/notes.md'
+const notes = new URL('./notes.md', import.meta.url).href
 
 const sketch = (p: p5) => {
   p.setup = () => {

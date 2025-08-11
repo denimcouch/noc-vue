@@ -14,7 +14,7 @@ interface CanvasColors {
   accent: string
 }
 
-const notes = '/src/chapters/00-randomness/notes.md'
+const notes = new URL('./notes.md', import.meta.url).href
 
 const sketch = (p: p5, canvasColors: CanvasColors) => {
   let walker: Walker
