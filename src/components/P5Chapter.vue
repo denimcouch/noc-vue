@@ -19,13 +19,13 @@
       :style="{ backgroundColor: themeColors.background }"
     >
       <div class="notes-section">
-        <MarkdownRenderer :file-path="notes" />
+        <markdown-renderer :file-path="notes" />
       </div>
     </n-layout-sider>
     <!-- Mobile/Tablet notes section -->
     <div v-if="isMobile" class="notes-mobile" :style="{ backgroundColor: themeColors.background }">
       <div class="notes-section">
-        <MarkdownRenderer :file-path="notes" />
+        <markdown-renderer :file-path="notes" />
       </div>
     </div>
   </n-layout>
