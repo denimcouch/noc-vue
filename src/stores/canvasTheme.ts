@@ -25,17 +25,24 @@ export const CANVAS_THEMES: CanvasThemeInfo[] = [
 ]
 
 export const useCanvasThemeStore = defineStore('canvasTheme', () => {
-  const currentTheme = ref<CanvasThemeOption>('primary')
+  // Initialize with saved theme or default to 'primary'
+  const savedTheme = localStorage.getItem('canvasTheme')
+  const currentTheme = ref<CanvasThemeOption>((savedTheme as CanvasThemeOption) || 'primary')
 
-  // Track theme preferences per chapter
-  const chapterThemes = ref<Record<string, CanvasThemeOption>>({})
+  // Load saved chapter themes or initialize empty
+  const savedChapterThemes = localStorage.getItem('chapterThemes')
+  const chapterThemes = ref<Record<string, CanvasThemeOption>>(
+    savedChapterThemes ? JSON.parse(savedChapterThemes) : {},
+  )
 
   const setTheme = (newTheme: CanvasThemeOption) => {
     currentTheme.value = newTheme
+    localStorage.setItem('canvasTheme', newTheme)
   }
 
   const setChapterTheme = (chapterId: string, theme: CanvasThemeOption) => {
     chapterThemes.value[chapterId] = theme
+    localStorage.setItem('chapterThemes', JSON.stringify(chapterThemes.value))
   }
 
   const getChapterTheme = (chapterId: string): CanvasThemeOption => {
