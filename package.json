@@ -15,8 +15,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/",
-    "build:macos-arm64": "bunx rollup -c rollup.config.macos-arm64.js"
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "marked": "^16.1.2",
