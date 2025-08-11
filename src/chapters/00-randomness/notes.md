@@ -17,6 +17,6 @@ The `random()` function from p5.js produces a **uniform distribution**, where th
 
 A uniform randomness isn't always what you want when trying to simulate the complexity of natural systems and organisms. For this reason, we actually leverage `random()` to return **nonuniform distributions**, where some numbers are favored over others. This approach is helpful when building out more complex natural systems, such as the Darwinian idea of "survival of the fittest".
 
-### Some Basic Probability Principles  
+### Some Basic Probability Principles
 
 I am going to add some definitions here since I didn't take Statistics or Probability in college and it's been over 15 years since I studied it.

@@ -10,7 +10,7 @@ import type { ThemeColors } from '../../composables/useTheme'
 
 const notes = '/src/chapters/02-forces/notes.md'
 
-const sketch = (p: p5, themeColors: ThemeColors) => {
+const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   // let position: p5.Vector
   // let velocity: p5.Vector
   // let acceleration: p5.Vector
@@ -23,7 +23,7 @@ const sketch = (p: p5, themeColors: ThemeColors) => {
   }
 
   p.draw = () => {
-    setP5Background(p, themeColors.canvas.background)
+    setP5Background(p, canvasColors.background)
 
     // Apply gravity force
     // const gravity = p.createVector(0, 0.2)

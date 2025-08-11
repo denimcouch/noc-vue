@@ -10,7 +10,7 @@ import type { ThemeColors } from '../../composables/useTheme'
 
 const notes = '/src/chapters/03-oscillation/notes.md'
 
-const sketch = (p: p5, themeColors: ThemeColors) => {
+const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   let angle = 0
   const angularVelocity = 0.05
 
@@ -19,14 +19,14 @@ const sketch = (p: p5, themeColors: ThemeColors) => {
   }
 
   p.draw = () => {
-    setP5Background(p, themeColors.canvas.background)
+    setP5Background(p, canvasColors.background)
     const amplitude = 300
     const x = amplitude * p.cos(angle)
 
     angle += angularVelocity
 
-    setP5Stroke(p, themeColors.canvas.stroke)
-    setP5Fill(p, themeColors.canvas.fill)
+    setP5Stroke(p, canvasColors.stroke)
+    setP5Fill(p, canvasColors.fill)
     p.translate(p.width / 2, p.height / 2)
     p.line(0, 0, x, 0)
     p.ellipse(x, 0, 20, 20)

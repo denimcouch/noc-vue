@@ -10,7 +10,7 @@ import type { ThemeColors } from '../../composables/useTheme'
 
 const notes = '/src/chapters/01-vectors/notes.md'
 
-const sketch = (p: p5, themeColors: ThemeColors) => {
+const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   // let position: p5.Vector
   // let velocity: p5.Vector
 
@@ -21,7 +21,7 @@ const sketch = (p: p5, themeColors: ThemeColors) => {
   }
 
   p.draw = () => {
-    setP5Background(p, themeColors.canvas.background)
+    setP5Background(p, canvasColors.background)
 
     // Update position with velocity
     // position.add(velocity)

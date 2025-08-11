@@ -33,12 +33,9 @@ const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
 // Provide theme colors to P5 sketches
 provide('themeColors', themeColors)
 
-interface CanvasColors {
-  background: string
-  stroke: string
-  fill: string
-  accent: string
-}
+import type { ThemeColors } from '../composables/useTheme'
+
+type CanvasColors = ThemeColors['canvas'][string]
 
 const props = defineProps<{
   sketch: (p: p5, canvasColors: CanvasColors) => void

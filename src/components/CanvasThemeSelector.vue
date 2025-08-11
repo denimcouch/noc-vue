@@ -1,6 +1,11 @@
 <template>
   <div class="canvas-theme-selector">
-    <n-dropdown trigger="click" :options="dropdownOptions" @select="handleThemeSelect" placement="bottom-start">
+    <n-dropdown
+      trigger="click"
+      :options="dropdownOptions"
+      @select="handleThemeSelect"
+      placement="bottom-start"
+    >
       <!-- <n-button class="theme-button" size="large" :bordered="false" circle>
         <template #icon>
           <n-icon class="theme-button-icon" :size="24">
@@ -52,7 +57,6 @@ const handleThemeSelect = (key: CanvasThemeOption) => canvasThemeStore.setTheme(
 .canvas-theme-selector {
   display: inline-block;
 }
-
 
 .theme-button {
   transition: all 0.2s ease;
