@@ -40,6 +40,10 @@ export function setupP5Theme(
   return p5Colors
 }
 
+export function setupP5Canvas(p: p5, width: number, height: number) {
+  p.createCanvas(width, height)
+}
+
 /**
  * Applies background color to P5.js canvas
  */

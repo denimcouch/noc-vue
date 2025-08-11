@@ -1,13 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export type CanvasThemeOption =
-  | 'primary'
-  | 'secondary'
-  | 'vibrant'
-  | 'monochrome'
-  | 'nature'
-  | 'neon'
+const canvasThemeOptions = [
+  'primary',
+  'secondary',
+  'vibrant',
+  'monochrome',
+  'nature',
+  'neon',
+] as const
+
+export type CanvasThemeOption = (typeof canvasThemeOptions)[number]
 
 export interface CanvasThemeInfo {
   id: CanvasThemeOption
@@ -26,8 +29,8 @@ export const CANVAS_THEMES: CanvasThemeInfo[] = [
 
 export const useCanvasThemeStore = defineStore('canvasTheme', () => {
   // Initialize with saved theme or default to 'primary'
-  const savedTheme = localStorage.getItem('canvasTheme')
-  const currentTheme = ref<CanvasThemeOption>((savedTheme as CanvasThemeOption) || 'primary')
+  const savedTheme = localStorage.getItem('canvasTheme') as CanvasThemeOption | null
+  const currentTheme = ref<CanvasThemeOption>(savedTheme ?? 'primary')
 
   // Load saved chapter themes or initialize empty
   const savedChapterThemes = localStorage.getItem('chapterThemes')
