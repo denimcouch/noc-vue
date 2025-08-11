@@ -16,7 +16,7 @@
       class="notes-sider"
       width="35%"
       :native-scrollbar="false"
-      content-style="height: 100%; overflow-y: auto; padding: 20px;"
+      content-style="height: 100%; overflow-y: auto; padding: 20px 40px 20px 0;"
       :style="{ backgroundColor: themeColors.background }"
     >
       <div class="notes-section">
