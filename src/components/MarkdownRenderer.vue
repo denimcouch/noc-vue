@@ -1,25 +1,25 @@
 <template>
   <div
+    v-if="!isLoading"
     class="markdown-content"
     v-html="renderedMarkdown"
     :style="{
-      backgroundColor: themeColors.surface,
-      color: themeColors.text,
-      borderColor: themeColors.border,
       '--theme-background': themeColors.background,
       '--theme-surface': themeColors.surface,
       '--theme-text': themeColors.text,
       '--theme-border': themeColors.border,
       '--theme-accent': themeColors.accent,
       '--theme-primary': themeColors.primary,
-      '--theme-secondary': themeColors.secondary
+      '--theme-secondary': themeColors.secondary,
     }"
-  ></div>
+  />
+  <MarkdownSkeleton v-else />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { marked } from 'marked'
+import MarkdownSkeleton from './skeletons/MarkdownSkeleton.vue'
 import { useTheme } from '../composables/useTheme'
 
 const { themeColors } = useTheme()
@@ -65,6 +65,9 @@ onMounted(() => {
 
 <style scoped>
 .markdown-content {
+  background-color: var(--theme-surface);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
