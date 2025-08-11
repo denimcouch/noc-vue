@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { NButton, NFlex } from 'naive-ui'
+import { NButton, NFlex, NH1, NIcon } from 'naive-ui'
+import { Leaf as LeafIcon } from '@vicons/ionicons5'
 import { useTheme } from '../composables/useTheme'
 import ChaptersMenu from './ChaptersMenu.vue'
 
@@ -13,7 +14,12 @@ const { themeColors } = useTheme()
   >
     <nav>
       <n-flex justify="space-between" align="center" class="navbar">
-        <h1 class="navbar-title" :style="{ color: themeColors.text }">Nature of Code</h1>
+        <n-h1 class="navbar-title" :style="{ color: themeColors.text }">
+          <n-icon :size="32" :color="themeColors.primary">
+            <LeafIcon />
+          </n-icon>
+          <span>Nature of Code</span>
+        </n-h1>
         <n-flex>
           <n-button ghost :bordered="false">
             <router-link class="navbar-link" to="/" :style="{ color: themeColors.text }"
@@ -31,18 +37,29 @@ const { themeColors } = useTheme()
 .navbar-container {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid;
 }
 
 .navbar-container nav {
-  max-width: 1200px;
+  max-width: calc(100% - 6rem);
   margin: 0 auto;
 }
 
 .navbar {
   padding: 0.5rem 1.5rem;
+}
+
+.navbar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.navbar-title span {
+  font-size: 1.25rem;
 }
 
 .navbar-link {
