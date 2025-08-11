@@ -28,7 +28,7 @@ const lightColors: ThemeColors = {
   surface: '#f9f9f9',
   primary: '#18a058',
   secondary: '#2080f0',
-  accent: '#f0a020',
+  accent: '#e67e22',
   text: '#333333',
   textSecondary: '#666666',
   border: '#e0e0e0',
