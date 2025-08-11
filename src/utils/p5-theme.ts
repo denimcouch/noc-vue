@@ -1,5 +1,6 @@
 import type p5 from 'p5'
 import type { ThemeColors } from '../composables/useTheme'
+import type { CanvasThemeOption } from '../stores/canvasTheme'
 
 export interface P5ThemeColors {
   background: string
@@ -25,12 +26,12 @@ export function hexToP5Color(hex: string): number[] {
 /**
  * Sets up theme colors for P5.js sketch
  */
-export function setupP5Theme(p: p5, themeColors: ThemeColors): P5ThemeColors {
+export function setupP5Theme(themeColors: ThemeColors, canvasTheme: CanvasThemeOption): P5ThemeColors {
   const p5Colors = {
-    background: themeColors.canvas.background,
-    stroke: themeColors.canvas.stroke,
-    fill: themeColors.canvas.fill,
-    accent: themeColors.canvas.accent,
+    background: themeColors.canvas[canvasTheme].background,
+    stroke: themeColors.canvas[canvasTheme].stroke,
+    fill: themeColors.canvas[canvasTheme].fill,
+    accent: themeColors.canvas[canvasTheme].accent,
   }
 
   return p5Colors

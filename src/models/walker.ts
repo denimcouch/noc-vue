@@ -1,8 +1,9 @@
 import p5 from 'p5'
-import { setP5Stroke } from '../utils/p5-theme'
+import { setP5Fill, setP5Stroke } from '../utils/p5-theme'
 
 export interface WalkerTheme {
   strokeColor: string
+  fillColor: string
 }
 
 export class Walker {
@@ -15,11 +16,12 @@ export class Walker {
     this.x = x
     this.y = y
     this.p = p
-    this.theme = theme || { strokeColor: '#000000' }
+    this.theme = theme || { strokeColor: '#000000', fillColor: '#000000' }
   }
 
   show() {
     setP5Stroke(this.p, this.theme.strokeColor)
+    setP5Fill(this.p, this.theme.fillColor)
     this.p.point(this.x, this.y)
   }
 

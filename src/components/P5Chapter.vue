@@ -1,9 +1,9 @@
 <template>
   <n-layout class="chapter-container" has-sider sider-placement="right">
-    <n-layout-content
-      class="canvas-area"
-      :style="{ backgroundColor: themeColors.background }"
-    >
+    <n-layout-content class="canvas-area" :style="{ backgroundColor: themeColors.background }">
+      <div class="canvas-controls">
+        <canvas-theme-selector />
+      </div>
       <div ref="canvasContainer" class="canvas-container"></div>
     </n-layout-content>
     <n-layout-sider
@@ -22,32 +22,60 @@
 
 <script setup lang="ts">
 import p5 from 'p5'
-import { ref, onMounted, onUnmounted, provide } from 'vue'
+import { ref, onMounted, onUnmounted, provide, watch } from 'vue'
 import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
-import { useTheme, type ThemeColors } from '../composables/useTheme'
+import { useTheme } from '../composables/useTheme'
 import MarkdownRenderer from './MarkdownRenderer.vue'
+import CanvasThemeSelector from './CanvasThemeSelector.vue'
 
-const { themeColors } = useTheme()
+const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
 
 // Provide theme colors to P5 sketches
 provide('themeColors', themeColors)
 
+interface CanvasColors {
+  background: string
+  stroke: string
+  fill: string
+  accent: string
+}
+
 const props = defineProps<{
-  sketch: (p: p5, themeColors: ThemeColors) => void
+  sketch: (p: p5, canvasColors: CanvasColors) => void
   notes: string
 }>()
 
 const canvasContainer = ref<HTMLElement>()
 let p5Instance: p5 | null = null
 
-onMounted(() => {
+const createSketch = () => {
   if (canvasContainer.value) {
-    // Create a wrapper function that passes theme colors to the sketch
+    // Create a wrapper function that passes current canvas colors to the sketch
     const sketchWithTheme = (p: p5) => {
-      props.sketch(p, themeColors.value)
+      props.sketch(p, currentCanvasColors.value)
     }
     p5Instance = new p5(sketchWithTheme, canvasContainer.value)
   }
+}
+
+const recreateSketch = () => {
+  if (p5Instance) {
+    p5Instance.remove()
+    p5Instance = null
+  }
+  createSketch()
+}
+
+// Watch for canvas theme changes and recreate the sketch
+watch(
+  () => canvasThemeStore.currentTheme,
+  () => {
+    recreateSketch()
+  },
+)
+
+onMounted(() => {
+  createSketch()
 })
 
 onUnmounted(() => {
@@ -68,8 +96,17 @@ onUnmounted(() => {
   height: 100%;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.canvas-controls {
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  z-index: 5;
 }
 
 .canvas-container {

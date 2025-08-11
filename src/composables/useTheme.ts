@@ -1,6 +1,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { darkTheme, lightTheme } from 'naive-ui'
+import { darkTheme, lightTheme, useOsTheme } from 'naive-ui'
 import type { GlobalTheme } from 'naive-ui'
+import { useCanvasThemeStore, type CanvasThemeOption } from '../stores/canvasTheme'
 
 export interface ThemeColors {
   background: string
@@ -13,10 +14,12 @@ export interface ThemeColors {
   border: string
   // P5.js specific colors
   canvas: {
-    background: string
-    stroke: string
-    fill: string
-    accent: string
+    [key: string]: {
+      stroke: string
+      background: string
+      fill: string
+      accent: string
+    }
   }
 }
 
@@ -30,10 +33,42 @@ const lightColors: ThemeColors = {
   textSecondary: '#666666',
   border: '#e0e0e0',
   canvas: {
-    stroke: '#333333',
-    background: '#fafafa',
-    fill: '#18a058',
-    accent: '#2080f0',
+    primary: {
+      stroke: '#333333',
+      background: '#fafafa',
+      fill: '#18a058',
+      accent: '#2080f0',
+    },
+    secondary: {
+      stroke: '#ff6b6b',
+      background: '#fff9e6',
+      fill: '#4ecdc4',
+      accent: '#ffe66d',
+    },
+    vibrant: {
+      stroke: '#e74c3c',
+      background: '#fff5f5',
+      fill: '#f39c12',
+      accent: '#9b59b6',
+    },
+    monochrome: {
+      stroke: '#2c3e50',
+      background: '#ecf0f1',
+      fill: '#34495e',
+      accent: '#7f8c8d',
+    },
+    nature: {
+      stroke: '#27ae60',
+      background: '#f8fffe',
+      fill: '#2ecc71',
+      accent: '#f39c12',
+    },
+    neon: {
+      stroke: '#ff006e',
+      background: '#fffbff',
+      fill: '#8338ec',
+      accent: '#3a86ff',
+    },
   },
 }
 
@@ -47,21 +82,65 @@ const darkColors: ThemeColors = {
   textSecondary: '#c2c2c2',
   border: '#262626',
   canvas: {
-    stroke: '#ffffff',
-    background: '#333333',
-    fill: '#63e2b7',
-    accent: '#70c0e8',
+    primary: {
+      stroke: '#ffffff',
+      background: '#333333',
+      fill: '#63e2b7',
+      accent: '#70c0e8',
+    },
+    secondary: {
+      stroke: '#e74c3c',
+      background: '#1a1a2e',
+      fill: '#9b59b6',
+      accent: '#f39c12',
+    },
+    vibrant: {
+      stroke: '#ff6b6b',
+      background: '#2c1810',
+      fill: '#feca57',
+      accent: '#ff9ff3',
+    },
+    monochrome: {
+      stroke: '#ecf0f1',
+      background: '#2c3e50',
+      fill: '#bdc3c7',
+      accent: '#95a5a6',
+    },
+    nature: {
+      stroke: '#58d68d',
+      background: '#1b2631',
+      fill: '#52c41a',
+      accent: '#faad14',
+    },
+    neon: {
+      stroke: '#ff0080',
+      background: '#0d1117',
+      fill: '#b400ff',
+      accent: '#00d4ff',
+    },
   },
 }
 
 export function useTheme() {
-  const isDark = ref(false)
+  const osTheme = useOsTheme()
+  const isDark = ref(osTheme.value === 'dark')
   let mediaQuery: MediaQueryList | null = null
+  const canvasThemeStore = useCanvasThemeStore()
 
   // Computed theme values
   const naiveTheme = computed<GlobalTheme | null>(() => (isDark.value ? darkTheme : lightTheme))
 
   const themeColors = computed<ThemeColors>(() => (isDark.value ? darkColors : lightColors))
+
+  // Get canvas colors for a specific theme
+  const getCanvasColors = (themeId: CanvasThemeOption) => {
+    return themeColors.value.canvas[themeId]
+  }
+
+  // Get current active canvas colors
+  const currentCanvasColors = computed(() => {
+    return getCanvasColors(canvasThemeStore.currentTheme)
+  })
 
   // Theme detection functions
   const detectSystemTheme = () => {
@@ -108,7 +187,10 @@ export function useTheme() {
     isDark,
     naiveTheme,
     themeColors,
+    currentCanvasColors,
+    getCanvasColors,
     toggleTheme,
     detectSystemTheme,
+    canvasThemeStore,
   }
 }
