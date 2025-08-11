@@ -5,10 +5,11 @@
     :sider-placement="isMobile ? undefined : 'right'"
   >
     <n-layout-content class="canvas-area" :style="{ backgroundColor: themeColors.background }">
-      <div class="canvas-controls">
-        <canvas-theme-selector />
+      <div ref="canvasContainer" class="canvas-container">
+        <div class="canvas-controls">
+          <canvas-theme-selector />
+        </div>
       </div>
-      <div ref="canvasContainer" class="canvas-container"></div>
     </n-layout-content>
     <n-layout-sider
       v-if="!isMobile"
@@ -35,14 +36,22 @@
 import p5 from 'p5'
 import { ref, onMounted, onUnmounted, provide, watch } from 'vue'
 import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
+import type { ThemeColors } from '../composables/useTheme'
 import { useTheme } from '../composables/useTheme'
 import MarkdownRenderer from './MarkdownRenderer.vue'
 import CanvasThemeSelector from './CanvasThemeSelector.vue'
 
-const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
+type CanvasColors = ThemeColors['canvas'][string]
 
-// Responsive breakpoint detection
+const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
 const isMobile = ref(false)
+const canvasContainer = ref<HTMLElement>()
+let p5Instance: p5 | null = null
+
+const props = defineProps<{
+  sketch: (p: p5, canvasColors: CanvasColors) => void
+  notes: string
+}>()
 
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth <= 768
@@ -51,21 +60,6 @@ const checkScreenSize = () => {
 const handleResize = () => {
   checkScreenSize()
 }
-
-// Provide theme colors to P5 sketches
-provide('themeColors', themeColors)
-
-import type { ThemeColors } from '../composables/useTheme'
-
-type CanvasColors = ThemeColors['canvas'][string]
-
-const props = defineProps<{
-  sketch: (p: p5, canvasColors: CanvasColors) => void
-  notes: string
-}>()
-
-const canvasContainer = ref<HTMLElement>()
-let p5Instance: p5 | null = null
 
 const createSketch = () => {
   if (canvasContainer.value) {
@@ -85,7 +79,10 @@ const recreateSketch = () => {
   createSketch()
 }
 
-// Watch for canvas theme changes and recreate the sketch
+// Provide theme colors to P5 sketches
+provide('themeColors', themeColors)
+
+// Watch for canvas theme changes and recreate the sketch when the theme changes
 watch(
   () => canvasThemeStore.currentTheme,
   () => {
@@ -121,13 +118,12 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .canvas-controls {
   position: absolute;
-  top: 5%;
-  left: 10%;
+  top: 560px;
+  left: 10px;
   z-index: 5;
 }
 
@@ -136,6 +132,7 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  position: relative;
 }
 
 .notes-sider {
