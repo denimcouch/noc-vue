@@ -1,5 +1,9 @@
 <template>
-  <n-layout class="chapter-container" has-sider sider-placement="right">
+  <n-layout
+    class="chapter-container"
+    :has-sider="!isMobile"
+    :sider-placement="isMobile ? undefined : 'right'"
+  >
     <n-layout-content class="canvas-area" :style="{ backgroundColor: themeColors.background }">
       <div class="canvas-controls">
         <canvas-theme-selector />
@@ -7,6 +11,7 @@
       <div ref="canvasContainer" class="canvas-container"></div>
     </n-layout-content>
     <n-layout-sider
+      v-if="!isMobile"
       class="notes-sider"
       width="35%"
       :native-scrollbar="false"
@@ -17,6 +22,12 @@
         <MarkdownRenderer :file-path="notes" />
       </div>
     </n-layout-sider>
+    <!-- Mobile/Tablet notes section -->
+    <div v-if="isMobile" class="notes-mobile" :style="{ backgroundColor: themeColors.background }">
+      <div class="notes-section">
+        <MarkdownRenderer :file-path="notes" />
+      </div>
+    </div>
   </n-layout>
 </template>
 
@@ -29,6 +40,17 @@ import MarkdownRenderer from './MarkdownRenderer.vue'
 import CanvasThemeSelector from './CanvasThemeSelector.vue'
 
 const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
+
+// Responsive breakpoint detection
+const isMobile = ref(false)
+
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth <= 768
+}
+
+const handleResize = () => {
+  checkScreenSize()
+}
 
 // Provide theme colors to P5 sketches
 provide('themeColors', themeColors)
@@ -72,10 +94,13 @@ watch(
 )
 
 onMounted(() => {
+  checkScreenSize()
+  window.addEventListener('resize', handleResize)
   createSketch()
 })
 
 onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
   if (p5Instance) {
     p5Instance.remove()
     p5Instance = null
@@ -124,6 +149,13 @@ onUnmounted(() => {
   height: 100%;
 }
 
+.notes-mobile {
+  padding: 20px;
+  overflow-y: auto;
+  height: 50vh;
+  min-height: 300px;
+}
+
 .chapter-header {
   font-size: 0.75rem;
 }
@@ -135,5 +167,50 @@ onUnmounted(() => {
 h2 {
   margin-bottom: 30px;
   font-size: 2.5em;
+}
+
+/* Mobile and tablet responsive styles */
+@media (max-width: 768px) {
+  .chapter-container {
+    flex-direction: column;
+  }
+
+  .canvas-area {
+    height: 50vh;
+    min-height: 300px;
+  }
+
+  .canvas-controls {
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    z-index: 5;
+  }
+
+  .canvas-container {
+    margin-top: 1rem;
+  }
+
+  .notes-mobile {
+    flex: 1;
+    height: auto;
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .canvas-controls {
+    top: 1%;
+    left: 2%;
+  }
+
+  .canvas-container {
+    margin-top: 0.5rem;
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
 }
 </style>
