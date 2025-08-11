@@ -1,62 +1,30 @@
 <template>
-  <div class="chapter-container">
-    <h2>Chapter 0: Randomness</h2>
-    <div ref="canvasContainer" class="canvas-container"></div>
-  </div>
+  <p5-chapter :sketch="sketch" :notes="notes" />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
 import p5 from 'p5'
+import { Walker } from '../../models/walker'
+import { setP5Background } from '../../utils/p5-theme'
+import P5Chapter from '../../components/P5Chapter.vue'
+import type { ThemeColors } from '../../composables/useTheme'
 
-const canvasContainer = ref<HTMLElement>()
-let p5Instance: p5 | null = null
+const notes = '/src/chapters/00-randomness/notes.md'
 
-onMounted(() => {
-  if (canvasContainer.value) {
-    const sketch = (p: p5) => {
-      p.setup = () => {
-        p.createCanvas(800, 600)
-        p.background(240)
-      }
+const sketch = (p: p5, themeColors: ThemeColors) => {
+  let walker: Walker
 
-      p.draw = () => {
-        // Random walker example
-        // p.stroke(0, 50)
-        // p.fill(255, 0, 0, 100)
-
-        // const x = p.random(p.width)
-        // const y = p.random(p.height)
-        // p.circle(x, y, 10)
-      }
-    }
-
-    p5Instance = new p5(sketch, canvasContainer.value)
+  p.setup = () => {
+    p.createCanvas(800, 600)
+    walker = new Walker(p.width / 2, p.height / 2, p, {
+      strokeColor: themeColors.canvas.stroke,
+    })
+    setP5Background(p, themeColors.canvas.background)
   }
-})
 
-onUnmounted(() => {
-  if (p5Instance) {
-    p5Instance.remove()
-    p5Instance = null
+  p.draw = () => {
+    walker.step()
+    walker.show()
   }
-})
+}
 </script>
-
-<style scoped>
-.chapter-container {
-  padding: 20px;
-  text-align: center;
-}
-
-.canvas-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-</style>

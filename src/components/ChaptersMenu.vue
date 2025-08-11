@@ -62,7 +62,7 @@ const showDropdown = ref(false)
     @update:show="showDropdown = $event"
     @select="showDropdown = false"
   >
-    <n-button ghost>
+    <n-button ghost :bordered="false">
       Chapters
       <template #icon>
         <svg viewBox="0 0 16 16" style="width: 1em; height: 1em">
