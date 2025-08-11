@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { NDropdown, NButton } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import { useTheme } from '../composables/useTheme'
 
 const router = useRouter()
 
@@ -52,6 +53,8 @@ const chapters: MenuOption[] = [
 ]
 
 const showDropdown = ref(false)
+
+const { themeColors } = useTheme()
 </script>
 
 <template>
@@ -62,7 +65,7 @@ const showDropdown = ref(false)
     @update:show="showDropdown = $event"
     @select="showDropdown = false"
   >
-    <n-button ghost :bordered="false">
+    <n-button ghost :bordered="false" :style="{ color: themeColors.text }">
       Chapters
       <template #icon>
         <svg viewBox="0 0 16 16" style="width: 1em; height: 1em">
