@@ -81,3 +81,7 @@ _Probability of a coin turning up heads three times in a row_
 const probAceFromDeck = 4 / 52 // => 7.7%;
 const probAceTwiceFromDeck = probAceFromDeck * probAceFromDeck // => 0.6% ;
 ```
+
+### Exercise 0.3  
+
+> Create a random walker with dynamic probabilities. For example, can you give it a 50 percent chance of moving in the direction of the mouse? Remember, you can use mouseX and mouseY to get the current mouse position in p5.js!
