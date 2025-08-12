@@ -17,7 +17,42 @@ The `random()` function from p5.js produces a **uniform distribution**, where th
 
 A uniform randomness isn't always what you want when trying to simulate the complexity of natural systems and organisms. For this reason, we actually leverage `random()` to return **nonuniform distributions**, where some numbers are favored over others. This approach is helpful when building out more complex natural systems, such as the Darwinian idea of "survival of the fittest".
 
-### Some Basic Probability Principles
+One way of using `random()` to provide an array with duplicated values.
+
+```ts
+let randomNums = [1, 1, 2, 3, 3]
+let value = random(randomNums)
+console.log(value)
+```
+
+Another way is to ask for a random number then allow an event to happen depending on wether or not that random number fits into a certain window.
+
+```ts
+let probability = 0.1 // 10%
+let random = random(1) // A random float from 0.1
+
+if (random < probability) {
+  console.log('Sing!') // will occur on average 10% of the time
+}
+```
+
+You can even create complex cases based on this approach
+
+```ts
+let random = random(1)
+
+if (random < 0.6) {
+  console.log("Sing!")
+} else if (random < 0.7) {
+  console.log("Dance!")
+} else {
+  console.log("Sleep")
+}
+```
+
+We can apply this type of nonuniform distribution to our `Walker` class and simulate a tendency towards direction.
+
+## Some Basic Probability Principles
 
 I am adding some definitions here since I didn't take Statistics or Probability in college and it's been over 15 years since I studied it.
 

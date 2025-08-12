@@ -60,9 +60,21 @@ export class Walker {
     // }
 
     // 8-direction random walk
-    const xstep = this.p.random(-1, 1)
-    const ystep = this.p.random(-1, 1)
-    this.x += xstep
-    this.y += ystep
+    // const xstep = this.p.random(-1, 1)
+    // const ystep = this.p.random(-1, 1)
+    // this.x += xstep
+    // this.y += ystep
+
+    // 8-direction random walk with bias towards direction
+    const random = this.p.random(1)
+    if (random < 0.4) {
+      this.x++
+    } else if (random < 0.6) {
+      this.x--
+    } else if (random < 0.8) {
+      this.y++
+    } else {
+      this.y--
+    }
   }
 }
