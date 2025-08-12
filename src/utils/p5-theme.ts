@@ -1,6 +1,7 @@
 import type p5 from 'p5'
-import type { ThemeColors } from '../composables/useTheme'
-import type { CanvasThemeOption } from '../stores/canvasTheme'
+import type { ThemeColors } from '@/composables/useTheme'
+import type { CanvasThemeOption } from '@/stores/canvasTheme'
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '@/constants/canvas'
 
 export interface P5ThemeColors {
   background: string
@@ -40,7 +41,7 @@ export function setupP5Theme(
   return p5Colors
 }
 
-export function setupP5Canvas(p: p5, width: number, height: number) {
+export function setupP5Canvas(p: p5, width = CANVAS_WIDTH, height = CANVAS_HEIGHT) {
   p.createCanvas(width, height)
 }
 

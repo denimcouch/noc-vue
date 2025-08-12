@@ -1,7 +1,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { darkTheme, lightTheme, useOsTheme } from 'naive-ui'
 import type { GlobalTheme } from 'naive-ui'
-import { useCanvasThemeStore, type CanvasThemeOption } from '../stores/canvasTheme'
+import { useCanvasThemeStore, type CanvasThemeOption } from '@/stores/canvasTheme'
 
 export interface ThemeColors {
   background: string

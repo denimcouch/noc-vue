@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NConfigProvider, NGlobalStyle } from 'naive-ui'
-import { useTheme } from './composables/useTheme'
-import NavBar from './components/NavBar.vue'
+import { useTheme } from '@/composables/useTheme'
+import NavBar from '@/components/NavBar.vue'
 
 const { naiveTheme, themeColors } = useTheme()
 </script>

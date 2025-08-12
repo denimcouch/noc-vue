@@ -1,11 +1,26 @@
 import p5 from 'p5'
-import { setP5Fill, setP5Stroke } from '../utils/p5-theme'
+import { setP5Fill, setP5Stroke } from '@/utils/p5-theme'
 
 export interface WalkerTheme {
   strokeColor: string
   fillColor: string
 }
 
+/**
+ * A class that represents a walker in a p5.js canvas
+ * @param x - The x-coordinate of the walker
+ * @param y - The y-coordinate of the walker
+ * @param p - The p5.js instance
+ * @param theme - The theme of the walker
+ *
+ * @example
+ * ```ts
+ * const theme = { strokeColor: '#000000', fillColor: '#000000' }
+ * const walker = new Walker(100, 100, p, theme)
+ * walker.show()
+ * walker.step()
+ * ```
+ */
 export class Walker {
   x: number
   y: number

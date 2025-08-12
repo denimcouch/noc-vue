@@ -42,7 +42,7 @@ _Probability of a coin turning up heads three times in a row_
 
 #### Solution  
 
-```typescript
+```ts
 const probAceFromDeck = 4 / 52 // => 7.7%;
 const probAceTwiceFromDeck = probAceFromDeck * probAceFromDeck // => 0.6% ;
 ```

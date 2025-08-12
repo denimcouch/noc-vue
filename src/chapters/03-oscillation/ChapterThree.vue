@@ -4,9 +4,9 @@
 
 <script setup lang="ts">
 import p5 from 'p5'
-import { setP5Background, setP5Stroke, setP5Fill, setupP5Canvas } from '../../utils/p5-theme'
-import P5Chapter from '../../components/P5Chapter.vue'
-import type { ThemeColors } from '../../composables/useTheme'
+import { setP5Background, setP5Stroke, setP5Fill, setupP5Canvas } from '@/utils/p5-theme'
+import P5Chapter from '@/components/P5Chapter.vue'
+import type { ThemeColors } from '@/composables/useTheme'
 
 const notes = new URL('./notes.md', import.meta.url).href
 
@@ -15,7 +15,7 @@ const sketch = (p: p5, canvasColors: ThemeColors['canvas'][string]) => {
   const angularVelocity = 0.05
 
   p.setup = () => {
-    setupP5Canvas(p, 800, 600)
+    setupP5Canvas(p)
   }
 
   p.draw = () => {

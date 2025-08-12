@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-const canvasThemeOptions = [
+export const canvasThemeOptions = [
   'primary',
   'secondary',
   'vibrant',

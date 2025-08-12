@@ -7,8 +7,8 @@ import 'vfonts/Lato.css'
 // Naive UI
 import { create, NConfigProvider } from 'naive-ui'
 
-import App from './App.vue'
-import router from './router'
+import App from '@/App.vue'
+import router from '@/router'
 
 const naive = create({
   components: [NConfigProvider],

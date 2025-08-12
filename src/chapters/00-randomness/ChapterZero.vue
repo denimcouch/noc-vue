@@ -4,9 +4,10 @@
 
 <script setup lang="ts">
 import p5 from 'p5'
-import { Walker } from '../../models/walker'
-import { setP5Background, setupP5Canvas } from '../../utils/p5-theme'
-import P5Chapter from '../../components/P5Chapter.vue'
+import { Walker } from '@/models/walker'
+import { setP5Background, setupP5Canvas } from '@/utils/p5-theme'
+import P5Chapter from '@/components/P5Chapter.vue'
+
 interface CanvasColors {
   background: string
   stroke: string
@@ -20,7 +21,7 @@ const sketch = (p: p5, canvasColors: CanvasColors) => {
   let walker: Walker
 
   p.setup = () => {
-    setupP5Canvas(p, 800, 600)
+    setupP5Canvas(p)
     setP5Background(p, canvasColors.background)
     walker = new Walker(p.width / 2, p.height / 2, p, {
       strokeColor: canvasColors.stroke,
