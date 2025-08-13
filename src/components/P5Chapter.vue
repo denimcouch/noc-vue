@@ -151,7 +151,7 @@ onUnmounted(() => {
   }
 
   .canvas-area {
-    height: 50vh;
+    height: unset;
     min-height: 300px;
   }
 

@@ -42,7 +42,29 @@ export function setupP5Theme(
 }
 
 export function setupP5Canvas(p: p5, width = CANVAS_WIDTH, height = CANVAS_HEIGHT) {
-  p.createCanvas(width, height)
+  if (typeof window !== 'undefined') {
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+
+    if (innerWidth < width || innerHeight < height) {
+      // Calculate scale factors for width and height
+      const scaleX = innerWidth / width
+      const scaleY = innerHeight / height
+
+      // Use the smaller scale to maintain aspect ratio
+      const scale = Math.min(scaleX, scaleY)
+
+      // Calculate new dimensions that maintain aspect ratio
+      const scaledWidth = width * scale
+      const scaledHeight = height * scale
+
+      p.createCanvas(scaledWidth, scaledHeight)
+    } else {
+      p.createCanvas(width, height)
+    }
+  } else {
+    p.createCanvas(width, height)
+  }
 }
 
 /**
