@@ -1,21 +1,21 @@
 <template>
-    <n-dropdown
-      trigger="click"
-      :options="dropdownOptions"
-      @select="handleThemeSelect"
-      placement="bottom-start"
-    >
-      <n-tooltip trigger="hover">
-        <template #trigger>
-          <n-button class="canvas-control-button" text :bordered="false">
-            <n-icon class="theme-button-icon" :size="24" :color="currentCanvasColors.stroke">
-              <color-palette-icon />
-            </n-icon>
-          </n-button>
-        </template>
-        <span>Change theme</span>
-      </n-tooltip>
-    </n-dropdown>
+  <n-dropdown
+    trigger="click"
+    :options="dropdownOptions"
+    @select="handleThemeSelect"
+    placement="bottom-start"
+  >
+    <n-tooltip trigger="hover">
+      <template #trigger>
+        <n-button class="canvas-control-button" text :bordered="false">
+          <n-icon class="theme-button-icon" :size="24" :color="currentCanvasColors.stroke">
+            <color-palette-icon />
+          </n-icon>
+        </n-button>
+      </template>
+      <span>Change theme</span>
+    </n-tooltip>
+  </n-dropdown>
 </template>
 
 <script setup lang="ts">
@@ -44,5 +44,4 @@ const dropdownOptions = computed(() =>
 const handleThemeSelect = (key: CanvasThemeOption) => canvasThemeStore.setTheme(key)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

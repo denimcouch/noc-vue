@@ -1,10 +1,13 @@
 <template>
-  <div class="markdown-skeleton" :style="{
-    '--theme-background': themeColors.background,
-    '--theme-surface': themeColors.surface,
-    '--theme-text': themeColors.text,
-    '--theme-border': themeColors.border,
-  }">
+  <div
+    class="markdown-skeleton"
+    :style="{
+      '--theme-background': themeColors.background,
+      '--theme-surface': themeColors.surface,
+      '--theme-text': themeColors.text,
+      '--theme-border': themeColors.border,
+    }"
+  >
     <n-skeleton text :height="40" />
     <n-skeleton text :repeat="2" />
     <n-skeleton text width="60%" />

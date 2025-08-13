@@ -34,22 +34,26 @@
 import p5 from 'p5'
 import { ref, onMounted, onUnmounted, provide, watch } from 'vue'
 import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
-import type { ThemeColors } from '../composables/useTheme'
+import { useP5Canvas } from '../composables/useP5Canvas'
+import type { P5ThemeColors } from '../utils/p5-theme'
 import { useTheme } from '../composables/useTheme'
 import MarkdownRenderer from './MarkdownRenderer.vue'
 import CanvasControls from './CanvasControls.vue'
 
-type CanvasColors = ThemeColors['canvas'][string]
-
-const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
-const isMobile = ref(false)
-const canvasContainer = ref<HTMLElement>()
-let p5Instance: p5 | null = null
-
 const props = defineProps<{
-  sketch: (p: p5, canvasColors: CanvasColors) => void
+  sketch: (p: p5, canvasColors: P5ThemeColors) => void
   notes: string
 }>()
+
+const sketchWithTheme = (p: p5) => {
+  props.sketch(p, currentCanvasColors.value)
+}
+
+const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
+
+const isMobile = ref(false)
+const canvasContainer = ref<HTMLElement | null>(null)
+const { p5Instance, recreateSketch } = useP5Canvas(sketchWithTheme, canvasContainer)
 
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth <= 768
@@ -57,24 +61,7 @@ const checkScreenSize = () => {
 
 const handleResize = () => {
   checkScreenSize()
-}
-
-const createSketch = () => {
-  if (canvasContainer.value) {
-    // Create a wrapper function that passes current canvas colors to the sketch
-    const sketchWithTheme = (p: p5) => {
-      props.sketch(p, currentCanvasColors.value)
-    }
-    p5Instance = new p5(sketchWithTheme, canvasContainer.value)
-  }
-}
-
-const recreateSketch = () => {
-  if (p5Instance) {
-    p5Instance.remove()
-    p5Instance = null
-  }
-  createSketch()
+  recreateSketch()
 }
 
 // Provide theme colors to P5 sketches
@@ -91,15 +78,11 @@ watch(
 onMounted(() => {
   checkScreenSize()
   window.addEventListener('resize', handleResize)
-  createSketch()
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
-  if (p5Instance) {
-    p5Instance.remove()
-    p5Instance = null
-  }
+  p5Instance.value?.remove()
 })
 </script>
 
