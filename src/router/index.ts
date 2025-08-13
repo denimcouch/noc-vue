@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: '/chapter/5',
       name: 'chapter-5',
-      component: () => import('../chapters/05-autonomous-agents/ChapterFIve.vue'),
+      component: () => import('../chapters/05-autonomous-agents/ChapterFive.vue'),
     },
   ],
 })
