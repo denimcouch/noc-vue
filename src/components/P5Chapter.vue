@@ -34,11 +34,11 @@
 import p5 from 'p5'
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
-import { useP5Canvas } from '../composables/useP5Canvas'
-import type { P5ThemeColors } from '../utils/p5-theme'
-import { useTheme } from '../composables/useTheme'
-import MarkdownRenderer from './MarkdownRenderer.vue'
-import CanvasControls from './CanvasControls.vue'
+import { useP5Canvas } from '@/composables/useP5Canvas'
+import type { P5ThemeColors } from '@/utils/p5-theme'
+import { useTheme } from '@/composables/useTheme'
+import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
+import CanvasControls from '@/components/CanvasControls.vue'
 
 const props = defineProps<{
   sketch: (p: p5, canvasColors: P5ThemeColors) => void

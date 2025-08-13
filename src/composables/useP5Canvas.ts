@@ -1,6 +1,7 @@
 import p5 from 'p5'
 import { onMounted, onUnmounted, ref, type Ref } from 'vue'
-import type { P5ThemeColors } from '../utils/p5-theme'
+
+import type { P5ThemeColors } from '@/utils/p5-theme'
 
 /**
  * Creates a p5.js instance and returns it and a set of functions for working with it

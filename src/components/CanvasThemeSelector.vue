@@ -22,8 +22,8 @@
 import { computed } from 'vue'
 import { NDropdown, NButton, NIcon, NTooltip } from 'naive-ui'
 import { ColorPalette as ColorPaletteIcon } from '@vicons/ionicons5'
-import { useTheme } from '../composables/useTheme'
-import type { CanvasThemeOption } from '../stores/canvasTheme'
+import { useTheme } from '@/composables/useTheme'
+import type { CanvasThemeOption } from '@/stores/canvasTheme'
 
 const { canvasThemeStore, currentCanvasColors } = useTheme()
 

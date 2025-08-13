@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import CanvasThemeSelector from './CanvasThemeSelector.vue'
-import RefreshCanvasButton from './RefreshCanvasButton.vue'
+import CanvasThemeSelector from '@/components/CanvasThemeSelector.vue'
+import RefreshCanvasButton from '@/components/RefreshCanvasButton.vue'
 
 const emit = defineEmits<{ (e: 'refreshCanvas'): void }>()
 

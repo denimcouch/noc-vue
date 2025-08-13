@@ -19,8 +19,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { marked } from 'marked'
-import MarkdownSkeleton from './skeletons/MarkdownSkeleton.vue'
-import { useTheme } from '../composables/useTheme'
+
+import MarkdownSkeleton from '@/components/skeletons/MarkdownSkeleton.vue'
+import { useTheme } from '@/composables/useTheme'
 
 const { themeColors } = useTheme()
 

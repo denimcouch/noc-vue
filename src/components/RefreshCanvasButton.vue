@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { Refresh as RefreshIcon } from '@vicons/ionicons5'
 import { NButton, NIcon, NTooltip } from 'naive-ui'
-import { useTheme } from '../composables/useTheme'
+import { useTheme } from '@/composables/useTheme'
 
 const { currentCanvasColors } = useTheme()
 
