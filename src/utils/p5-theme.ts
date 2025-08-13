@@ -1,6 +1,4 @@
 import type p5 from 'p5'
-import type { ThemeColors } from '@/composables/useTheme'
-import type { CanvasThemeOption } from '@/stores/canvasTheme'
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '@/constants/canvas'
 
 export interface P5ThemeColors {
