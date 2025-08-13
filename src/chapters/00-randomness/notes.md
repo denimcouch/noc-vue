@@ -42,11 +42,11 @@ You can even create complex cases based on this approach
 let random = random(1)
 
 if (random < 0.6) {
-  console.log("Sing!")
+  console.log('Sing!')
 } else if (random < 0.7) {
-  console.log("Dance!")
+  console.log('Dance!')
 } else {
-  console.log("Sleep")
+  console.log('Sleep')
 }
 ```
 
@@ -60,28 +60,28 @@ I am adding some definitions here since I didn't take Statistics or Probability 
 **Outcomes** - All possible results of a random process.  
 **Event** - The specific outcome or combination of outcomes being considered.
 
-### Exercise 0.2  
+### Exercise 0.2
 
 > What is the probability of drawing two aces in a row from a deck of 52 cards, if you reshuffle your first draw back into the deck before making your second draw? What would that probability be if you didn't reshuffle after your first draw?
 
 _Probability of drawing an ace from a deck_  
-`number of aces / number of cards = 4/52 = 0.077 ≈ 8%`  
+`number of aces / number of cards = 4/52 = 0.077 ≈ 8%`
 
 _Probability of drawing a diamond from a deck_  
-`number of aces / number of cards = 13/52 = 0.25 = 25%`  
+`number of aces / number of cards = 13/52 = 0.25 = 25%`
 
 **The probability of multiple events occurring can be calculated by multiplying the individual properties of each event.**
 
 _Probability of a coin turning up heads three times in a row_  
-`(1/2) * (1/2) * (1/2) = 1/8 = 0.125 = 12.5%`  
+`(1/2) * (1/2) * (1/2) = 1/8 = 0.125 = 12.5%`
 
-#### Solution  
+#### Solution
 
 ```ts
 const probAceFromDeck = 4 / 52 // => 7.7%;
 const probAceTwiceFromDeck = probAceFromDeck * probAceFromDeck // => 0.6% ;
 ```
 
-### Exercise 0.3  
+### Exercise 0.3
 
 > Create a random walker with dynamic probabilities. For example, can you give it a 50 percent chance of moving in the direction of the mouse? Remember, you can use mouseX and mouseY to get the current mouse position in p5.js!
