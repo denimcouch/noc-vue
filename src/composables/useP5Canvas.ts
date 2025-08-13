@@ -5,7 +5,6 @@ import type { P5ThemeColors } from '../utils/p5-theme'
 /**
  * Creates a p5.js instance and returns it and a set of functions for working with it
  * @param sketch - The p5.js sketch function to run
- * @param themeColors - The theme colors to use for the sketch
  * @param container - The ref to the HTML element to attach the canvas to
  * @returns p5Instance: p5 | null, recreateSketch: () => void
  */
