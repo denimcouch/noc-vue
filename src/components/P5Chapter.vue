@@ -6,9 +6,7 @@
   >
     <n-layout-content class="canvas-area" :style="{ backgroundColor: themeColors.background }">
       <div ref="canvasContainer" class="canvas-container">
-        <div class="canvas-controls">
-          <canvas-theme-selector />
-        </div>
+        <canvas-controls @refresh-canvas="recreateSketch" />
       </div>
     </n-layout-content>
     <n-layout-sider
@@ -39,7 +37,7 @@ import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
 import type { ThemeColors } from '../composables/useTheme'
 import { useTheme } from '../composables/useTheme'
 import MarkdownRenderer from './MarkdownRenderer.vue'
-import CanvasThemeSelector from './CanvasThemeSelector.vue'
+import CanvasControls from './CanvasControls.vue'
 
 type CanvasColors = ThemeColors['canvas'][string]
 
@@ -120,18 +118,11 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-.canvas-controls {
-  position: absolute;
-  top: 560px;
-  left: 10px;
-  z-index: 5;
-}
-
 .canvas-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
   position: relative;
 }
 
@@ -151,19 +142,6 @@ onUnmounted(() => {
   overflow-y: auto;
   height: 50vh;
   min-height: 300px;
-}
-
-.chapter-header {
-  font-size: 0.75rem;
-}
-
-.chapter-header h2 {
-  margin-bottom: 0;
-}
-
-h2 {
-  margin-bottom: 30px;
-  font-size: 2.5em;
 }
 
 /* Mobile and tablet responsive styles */

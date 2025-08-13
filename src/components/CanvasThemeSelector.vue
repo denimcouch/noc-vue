@@ -1,22 +1,14 @@
 <template>
-  <div class="canvas-theme-selector">
     <n-dropdown
       trigger="click"
       :options="dropdownOptions"
       @select="handleThemeSelect"
       placement="bottom-start"
     >
-      <!-- <n-button class="theme-button" size="large" :bordered="false" circle>
-        <template #icon>
-          <n-icon class="theme-button-icon" :size="24">
-            <color-palette-icon />
-          </n-icon>
-        </template>
-      </n-button> -->
       <n-tooltip trigger="hover">
         <template #trigger>
-          <n-button class="theme-button" text size="large" :bordered="false">
-            <n-icon class="theme-button-icon" :size="28" :color="currentCanvasColors.stroke">
+          <n-button class="canvas-control-button" text :bordered="false">
+            <n-icon class="theme-button-icon" :size="24" :color="currentCanvasColors.stroke">
               <color-palette-icon />
             </n-icon>
           </n-button>
@@ -24,7 +16,6 @@
         <span>Change theme</span>
       </n-tooltip>
     </n-dropdown>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -54,15 +45,4 @@ const handleThemeSelect = (key: CanvasThemeOption) => canvasThemeStore.setTheme(
 </script>
 
 <style scoped>
-.canvas-theme-selector {
-  display: inline-block;
-}
-
-.theme-button {
-  transition: all 0.2s ease;
-}
-
-.theme-button:hover {
-  transform: scale(1.1);
-}
 </style>
