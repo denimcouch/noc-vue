@@ -3,54 +3,19 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { NDropdown, NButton } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
-import { useTheme } from '../composables/useTheme'
+
+import { useTheme } from '@/composables/useTheme'
+import { CHAPTERS } from '@/constants/chapters'
 
 const router = useRouter()
 
-const chapters: MenuOption[] = [
-  {
-    label: 'Chapter 0: Randomness',
-    key: 'chapter-0',
-    props: {
-      onClick: () => router.push('/chapter/0'),
-    },
+const chapters: MenuOption[] = CHAPTERS.map((chapter) => ({
+  label: `Chapter ${chapter.id}: ${chapter.name}`,
+  key: `chapter-${chapter.id}`,
+  props: {
+    onClick: () => router.push(chapter.path),
   },
-  {
-    label: 'Chapter 1: Vectors',
-    key: 'chapter-1',
-    props: {
-      onClick: () => router.push('/chapter/1'),
-    },
-  },
-  {
-    label: 'Chapter 2: Forces',
-    key: 'chapter-2',
-    props: {
-      onClick: () => router.push('/chapter/2'),
-    },
-  },
-  {
-    label: 'Chapter 3: Oscillation',
-    key: 'chapter-3',
-    props: {
-      onClick: () => router.push('/chapter/3'),
-    },
-  },
-  {
-    label: 'Chapter 4: Particle Systems',
-    key: 'chapter-4',
-    props: {
-      onClick: () => router.push('/chapter/4'),
-    },
-  },
-  {
-    label: 'Chapter 5: Autonomous Agents',
-    key: 'chapter-5',
-    props: {
-      onClick: () => router.push('/chapter/5'),
-    },
-  },
-]
+}))
 
 const showDropdown = ref(false)
 
