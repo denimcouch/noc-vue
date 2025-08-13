@@ -124,8 +124,10 @@ const darkColors: ThemeColors = {
 export function useTheme() {
   const osTheme = useOsTheme()
   const isDark = ref(osTheme.value === 'dark')
-  let mediaQuery: MediaQueryList | null = null
   const canvasThemeStore = useCanvasThemeStore()
+
+  let mediaQuery: MediaQueryList | null = null
+  let themeChangeHandler: ((e: MediaQueryListEvent) => void) | null = null
 
   // Computed theme values
   const naiveTheme = computed<GlobalTheme | null>(() => (isDark.value ? darkTheme : lightTheme))
@@ -158,15 +160,17 @@ export function useTheme() {
     if (typeof window !== 'undefined' && window.matchMedia) {
       mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       isDark.value = mediaQuery.matches
+      themeChangeHandler = (e) => updateTheme(e.matches)
 
       // Add listener for theme changes
-      mediaQuery.addEventListener('change', (e) => updateTheme(e.matches))
+      mediaQuery.addEventListener('change', themeChangeHandler)
     }
   }
 
   const cleanup = () => {
-    if (mediaQuery) {
-      mediaQuery.removeEventListener('change', (e) => updateTheme(e.matches))
+    if (mediaQuery && themeChangeHandler) {
+      mediaQuery.removeEventListener('change', themeChangeHandler)
+      themeChangeHandler = null
     }
   }
 
