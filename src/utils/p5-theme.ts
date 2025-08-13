@@ -24,23 +24,6 @@ export function hexToP5Color(hex: string): number[] {
   return [r, g, b]
 }
 
-/**
- * Sets up theme colors for P5.js sketch
- */
-export function setupP5Theme(
-  themeColors: ThemeColors,
-  canvasTheme: CanvasThemeOption,
-): P5ThemeColors {
-  const p5Colors = {
-    background: themeColors.canvas[canvasTheme].background,
-    stroke: themeColors.canvas[canvasTheme].stroke,
-    fill: themeColors.canvas[canvasTheme].fill,
-    accent: themeColors.canvas[canvasTheme].accent,
-  }
-
-  return p5Colors
-}
-
 export function setupP5Canvas(p: p5, width = CANVAS_WIDTH, height = CANVAS_HEIGHT) {
   if (typeof window !== 'undefined') {
     const innerWidth = window.innerWidth
