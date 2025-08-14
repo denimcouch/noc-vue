@@ -32,13 +32,13 @@
 
 <script setup lang="ts">
 import p5 from 'p5'
-import { ref, onMounted, onUnmounted, provide, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
-import { useP5Canvas } from '../composables/useP5Canvas'
-import type { P5ThemeColors } from '../utils/p5-theme'
-import { useTheme } from '../composables/useTheme'
-import MarkdownRenderer from './MarkdownRenderer.vue'
-import CanvasControls from './CanvasControls.vue'
+import { useP5Canvas } from '@/composables/useP5Canvas'
+import type { P5ThemeColors } from '@/utils/p5-theme'
+import { useTheme } from '@/composables/useTheme'
+import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
+import CanvasControls from '@/components/CanvasControls.vue'
 
 const props = defineProps<{
   sketch: (p: p5, canvasColors: P5ThemeColors) => void
@@ -53,7 +53,7 @@ const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
 
 const isMobile = ref(false)
 const canvasContainer = ref<HTMLElement | null>(null)
-const { p5Instance, recreateSketch } = useP5Canvas(sketchWithTheme, canvasContainer)
+const { recreateSketch } = useP5Canvas(sketchWithTheme, canvasContainer)
 
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth <= 768
@@ -63,9 +63,6 @@ const handleResize = () => {
   checkScreenSize()
   recreateSketch()
 }
-
-// Provide theme colors to P5 sketches
-provide('themeColors', themeColors)
 
 // Watch for canvas theme changes and recreate the sketch when the theme changes
 watch(
@@ -82,7 +79,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
-  p5Instance.value?.remove()
 })
 </script>
 

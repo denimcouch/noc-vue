@@ -5,7 +5,7 @@
     @select="handleThemeSelect"
     placement="bottom-start"
   >
-    <n-tooltip trigger="hover">
+    <n-tooltip trigger="hover" placement="right">
       <template #trigger>
         <n-button class="canvas-control-button" text :bordered="false">
           <n-icon class="theme-button-icon" :size="24" :color="currentCanvasColors.stroke">
@@ -22,8 +22,8 @@
 import { computed } from 'vue'
 import { NDropdown, NButton, NIcon, NTooltip } from 'naive-ui'
 import { ColorPalette as ColorPaletteIcon } from '@vicons/ionicons5'
-import { useTheme } from '../composables/useTheme'
-import type { CanvasThemeOption } from '../stores/canvasTheme'
+import { useTheme } from '@/composables/useTheme'
+import type { CanvasThemeOption } from '@/stores/canvasTheme'
 
 const { canvasThemeStore, currentCanvasColors } = useTheme()
 

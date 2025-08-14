@@ -1,5 +1,5 @@
 <template>
-  <n-tooltip trigger="hover">
+  <n-tooltip trigger="hover" placement="right">
     <template #trigger>
       <n-button class="canvas-control-button" text :bordered="false" @click="handleClick">
         <n-icon class="refresh-button-icon" :size="24" :color="currentCanvasColors.stroke">
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { Refresh as RefreshIcon } from '@vicons/ionicons5'
 import { NButton, NIcon, NTooltip } from 'naive-ui'
-import { useTheme } from '../composables/useTheme'
+import { useTheme } from '@/composables/useTheme'
 
 const { currentCanvasColors } = useTheme()
 

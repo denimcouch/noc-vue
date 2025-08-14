@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { NButton, NFlex, NH1, NIcon } from 'naive-ui'
 import { Leaf as LeafIcon } from '@vicons/ionicons5'
-import { useTheme } from '../composables/useTheme'
-import ChaptersMenu from './ChaptersMenu.vue'
+import ChaptersMenu from '@/components/ChaptersMenu.vue'
+import { useTheme } from '@/composables/useTheme'
 
 const { themeColors } = useTheme()
 </script>
