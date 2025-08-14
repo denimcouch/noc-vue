@@ -37,6 +37,7 @@ import { NLayout, NLayoutContent, NLayoutSider } from 'naive-ui'
 import { useP5Canvas } from '@/composables/useP5Canvas'
 import type { P5ThemeColors } from '@/utils/p5-theme'
 import { useTheme } from '@/composables/useTheme'
+import { useScreen } from '@/composables/useScreen'
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import CanvasControls from '@/components/CanvasControls.vue'
 
@@ -50,17 +51,12 @@ const sketchWithTheme = (p: p5) => {
 }
 
 const { themeColors, currentCanvasColors, canvasThemeStore } = useTheme()
+const { isMobile } = useScreen()
 
-const isMobile = ref(false)
 const canvasContainer = ref<HTMLElement | null>(null)
 const { recreateSketch } = useP5Canvas(sketchWithTheme, canvasContainer)
 
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth <= 768
-}
-
 const handleResize = () => {
-  checkScreenSize()
   recreateSketch()
 }
 
@@ -73,7 +69,6 @@ watch(
 )
 
 onMounted(() => {
-  checkScreenSize()
   window.addEventListener('resize', handleResize)
 })
 
@@ -124,7 +119,7 @@ onUnmounted(() => {
 }
 
 /* Mobile and tablet responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 810px) {
   .chapter-container {
     flex-direction: column;
   }
@@ -132,13 +127,6 @@ onUnmounted(() => {
   .canvas-area {
     height: unset;
     min-height: 300px;
-  }
-
-  .canvas-controls {
-    position: absolute;
-    top: 2%;
-    left: 5%;
-    z-index: 5;
   }
 
   .canvas-container {
@@ -149,22 +137,6 @@ onUnmounted(() => {
     flex: 1;
     height: auto;
     min-height: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  .canvas-controls {
-    top: 1%;
-    left: 2%;
-  }
-
-  .canvas-container {
-    margin-top: 0.5rem;
-  }
-
-  h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
   }
 }
 </style>

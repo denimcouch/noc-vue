@@ -36,4 +36,11 @@ const recreateSketch = () => {
   left: 10px;
   z-index: 5;
 }
+
+@media (max-width: 768px) {
+  .canvas-controls {
+    top: 85%;
+    left: 2%;
+  }
+}
 </style>
