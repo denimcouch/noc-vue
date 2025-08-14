@@ -1,5 +1,5 @@
 <template>
-  <n-tooltip trigger="hover">
+  <n-tooltip trigger="hover" placement="right">
     <template #trigger>
       <n-button class="canvas-control-button" text :bordered="false" @click="handleClick">
         <n-icon class="refresh-button-icon" :size="24" :color="currentCanvasColors.stroke">

@@ -5,7 +5,7 @@
     @select="handleThemeSelect"
     placement="bottom-start"
   >
-    <n-tooltip trigger="hover">
+    <n-tooltip trigger="hover" placement="right">
       <template #trigger>
         <n-button class="canvas-control-button" text :bordered="false">
           <n-icon class="theme-button-icon" :size="24" :color="currentCanvasColors.stroke">
