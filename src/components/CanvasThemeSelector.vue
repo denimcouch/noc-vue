@@ -27,6 +27,8 @@ import type { CanvasThemeOption } from '@/stores/canvasTheme'
 
 const { canvasThemeStore, currentCanvasColors } = useTheme()
 
+const emit = defineEmits<{ showMenu: [showMenu: boolean] }>()
+
 const dropdownOptions = computed(() =>
   canvasThemeStore.availableThemes.map((theme) => ({
     label: theme.name,
@@ -41,7 +43,10 @@ const dropdownOptions = computed(() =>
   })),
 )
 
-const handleThemeSelect = (key: CanvasThemeOption) => canvasThemeStore.setTheme(key)
+const handleThemeSelect = (key: CanvasThemeOption) => {
+  canvasThemeStore.setTheme(key)
+  emit('showMenu', false)
+}
 </script>
 
 <style scoped></style>

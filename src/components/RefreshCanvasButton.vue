@@ -18,10 +18,11 @@ import { useTheme } from '@/composables/useTheme'
 
 const { currentCanvasColors } = useTheme()
 
-const emit = defineEmits<{ (e: 'refreshCanvas'): void }>()
+const emit = defineEmits<{ refreshCanvas: [], showMenu: [showMenu: boolean] }>()
 
 const handleClick = () => {
   emit('refreshCanvas')
+  emit('showMenu', false)
 }
 </script>
 
