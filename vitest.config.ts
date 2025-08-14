@@ -14,6 +14,7 @@ export default mergeConfig(
       globals: true,
       clearMocks: true,
       mockReset: true,
+      setupFiles: ['src/__tests__/setup.ts'],
     },
   }),
 )
