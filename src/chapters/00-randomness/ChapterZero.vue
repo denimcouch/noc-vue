@@ -13,7 +13,6 @@ const notes = new URL('./notes.md', import.meta.url).href
 const sketch = (p: p5, canvasColors: P5ThemeColors) => {
   const walkers: Walker[] = []
   const maxWalkers = 20
-  const minWalkers = 2
 
   p.setup = () => {
     setupP5Canvas(p)
@@ -31,24 +30,26 @@ const sketch = (p: p5, canvasColors: P5ThemeColors) => {
   }
 
   p.draw = () => {
-    const random = p.random(1)
-
-    if (random < 0.1 && walkers.length < maxWalkers) {
-      const bias = walkerBiases[Math.floor(p.random(walkerBiases.length))]
-      walkers.push(
-        new Walker(p.random(p.width), p.random(p.height), p, bias, {
-          strokeColor: canvasColors.stroke,
-          fillColor: canvasColors.fill,
-        }),
-      )
-    } else if (random < 0.2 && walkers.length > minWalkers) {
-      walkers.pop()
-    }
-
     walkers.forEach((walker) => {
       walker.step()
       walker.show()
     })
+  }
+
+  p.mouseClicked = () => {
+    if (walkers.length === maxWalkers) {
+      walkers.shift()
+    }
+
+    if (walkers.length < maxWalkers) {
+      const bias = walkerBiases[Math.floor(p.random(walkerBiases.length))]
+      walkers.push(
+        new Walker(p.mouseX, p.mouseY, p, bias, {
+          strokeColor: canvasColors.stroke,
+          fillColor: canvasColors.fill,
+        }),
+      )
+    }
   }
 }
 </script>
