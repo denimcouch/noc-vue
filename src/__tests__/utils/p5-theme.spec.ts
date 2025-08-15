@@ -17,9 +17,10 @@ describe('p5-theme utils', () => {
   })
 
   it('setP5Stroke calls p.stroke with rgb values', () => {
-    const p = { stroke: vi.fn() } as unknown as p5
-    setP5Stroke(p, '#18a058')
+    const p = { stroke: vi.fn(), strokeWeight: vi.fn() } as unknown as p5
+    setP5Stroke(p, '#18a058', 2)
     expect(p.stroke).toHaveBeenCalledWith(24, 160, 88)
+    expect(p.strokeWeight).toHaveBeenCalledWith(2)
   })
 
   it('setP5Fill calls p.fill with rgb values', () => {

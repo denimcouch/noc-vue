@@ -8,6 +8,7 @@ const mockP5 = {
   point: vi.fn(),
   random: vi.fn(),
   fill: vi.fn(),
+  strokeWeight: vi.fn(),
 }
 
 const mockBias = walkerBiases[0]
@@ -54,6 +55,7 @@ describe('Walker', () => {
     walker.show()
 
     expect(mockP5.stroke).toHaveBeenCalledWith(0, 0, 0) // mockTheme.strokeColor
+    expect(mockP5.strokeWeight).toHaveBeenCalledWith(1)
     expect(mockP5.fill).toHaveBeenCalledWith(0, 0, 0) // mockTheme.fillColor
     expect(mockP5.point).toHaveBeenCalledWith(10, 20)
   })
