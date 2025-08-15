@@ -59,9 +59,10 @@ export function setP5Background(p: p5, color: string) {
 /**
  * Applies stroke color to P5.js canvas
  */
-export function setP5Stroke(p: p5, color: string) {
+export function setP5Stroke(p: p5, color: string, weight: number = 1) {
   const [r, g, b] = hexToP5Color(color)
   p.stroke(r, g, b)
+  p.strokeWeight(weight)
 }
 
 /**

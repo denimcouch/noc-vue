@@ -40,7 +40,8 @@ export class Walker {
   }
 
   public show() {
-    setP5Stroke(this.p, this.theme.strokeColor)
+    const randomStrokeWeight = this.p.random([1, 1, 2, 3, 3])
+    setP5Stroke(this.p, this.theme.strokeColor, randomStrokeWeight)
     setP5Fill(this.p, this.theme.fillColor)
     this.p.point(this.x, this.y)
   }
