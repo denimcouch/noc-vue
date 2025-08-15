@@ -17,6 +17,8 @@ const sketch = (p: p5, canvasColors: P5ThemeColors) => {
   p.setup = () => {
     setupP5Canvas(p)
     setP5Background(p, canvasColors.background)
+    p.fill(canvasColors.accent)
+    p.text('Click to spawn a new walker', 10, 20)
     walkers.push(
       new Walker(p.width / 2, p.height / 2, p, 'random', {
         strokeColor: canvasColors.stroke,
