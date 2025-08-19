@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NFlex, NH1, NIcon } from 'naive-ui'
+import { NFlex, NH1, NIcon } from 'naive-ui'
 import { Leaf as LeafIcon } from '@vicons/ionicons5'
 import ChaptersMenu from '@/components/ChaptersMenu.vue'
 import { useTheme } from '@/composables/useTheme'
@@ -14,18 +14,15 @@ const { themeColors } = useTheme()
   >
     <nav>
       <n-flex justify="space-between" align="center" class="navbar">
-        <n-h1 class="navbar-title" :style="{ color: themeColors.text }">
-          <n-icon :size="32" :color="themeColors.primary">
-            <LeafIcon />
-          </n-icon>
-          <span>Nature of Code</span>
-        </n-h1>
+        <router-link to="/" class="navbar-link">
+          <n-h1 class="navbar-title" :style="{ color: themeColors.text }">
+            <n-icon :size="32" :color="themeColors.primary">
+              <LeafIcon />
+            </n-icon>
+            <span>Nature of Code</span>
+          </n-h1>
+        </router-link>
         <n-flex>
-          <n-button ghost :bordered="false">
-            <router-link class="navbar-link" to="/" :style="{ color: themeColors.text }"
-              >Home</router-link
-            >
-          </n-button>
           <chapters-menu />
         </n-flex>
       </n-flex>

@@ -6,7 +6,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: CHAPTERS[0].path,
+      name: 'home',
+      component: () => import('@/components/HomePage.vue'),
     },
       ...CHAPTERS.map((chapter) => ({
       path: chapter.path,
